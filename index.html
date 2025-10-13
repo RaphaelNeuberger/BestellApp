@@ -53,13 +53,13 @@
       </div>
 
       <div class="header-right">
-        <div class="search-placeholder">Suche Gerichte oder Menü</div>
-        <button class="cart-btn" aria-label="Warenkorb" aria-describedby="cart-count">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-              stroke-linejoin="round" />
+        <!-- <input type="search" id="search-input" placeholder="Suche Gerichte oder Menü"> -->
+        <div class="search-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M21 21l-4.35-4.35m2.35-5.65a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <span id="cart-count" class="cart-count" aria-live="polite" aria-atomic="true">0</span>
+          <input type="search" id="search-input" placeholder="Suche Gerichte oder Menü">
+        </div>
         </button>
       </div>
     </div>
@@ -96,103 +96,68 @@
       </ul>
     </nav>
 
-
-    <!-- Beispiel-Speisekategorie mit Artikeln -->
-    <section id="vorspeisen" class="menu-section">
-      <div class="container">
+    <main>
+      <section id="vorspeisen" data-category="Vorspeisen">
         <h2>Vorspeisen</h2>
-        <p class="count">15 Artikel</p>
-
-
-        <div class="menu-items">
-          <!-- Jedes Menü-Item als <article> für Semantik -->
-          <div class="menu-list">
-            <article class="menu-item">
-              <img src="./assets/img/Bestell App- Logo.svg" alt="Mini Frühlingsrollen" />
-              <div class="menu-info">
-                <div>
-                  <h3 class="item-title">Mini Frühlingsrollen (6 Stück)</h3>
-                  <p class="item-desc">mit Gemüsefüllung</p>
-                </div>
-                <div class="menu-actions">
-                  <div class="price">4,99 €</div>
-                  <div>
-                    <button class="add-btn" onclick="addToCart('Pizza Margherita', 8.99)">
-                      + In den Warenkorb
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-
-            <!-- Weiter Items... (kannst du später kopieren/erweitern) -->
-          </div>
+        <div class="menu-items" id="vorspeisen-container">
+          <!-- Artikel werden hier eingefügt -->
         </div>
-    </section>
+      </section>
 
-
-    <!-- Weitere Kategorien: Suppen, Salate, Hauptgerichte, Sushi etc. -->
-    <section id="suppen" class="menu-section">
-      <div class="container">
+      <section id="suppen" data-category="Suppen">
         <h2>Suppen</h2>
-        <!-- Platz für Items -->
-      </div>
-    </section>
+        <div class="menu-items" id="suppen-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
 
+      <section id="salate" data-category="Salate">
+        <h2>Salate</h2>
+        <div class="menu-items" id="salate-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
 
-    <section id="sushi-maki" class="menu-section">
-      <div class="container">
+      <section id="sushi-maki" data-category="Sushi - Maki">
         <h2>Sushi - Maki</h2>
-        <!-- Platz für Items -->
-      </div>
-    </section>
+        <div class="menu-items" id="sushi-maki-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
 
-    <section id="desserts" class="menu-section">
-      <div class="container">
+      <section id="desserts" data-category="Desserts">
         <h2>Desserts</h2>
-        <!-- Platz für Items -->
-      </div>
-    </section>
+        <div class="menu-items" id="desserts-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
 
-    <section id="drinks" class="menu-section">
-      <div class="container">
+      <section id="getraenke" data-category="Getränke">
         <h2>Getränke</h2>
-        <!-- Platz für Items -->
-      </div>
-    </section>
-
-    <!-- Impressum / Footer-Bereich -->
-    <footer id="impressum" role="contentinfo">
-      <div class="container footer-inner">
-        <h3>Restaurant</h3>
-        <address>
-          Asia Food — Japanisches Sushi &amp; Vietnamesische Küche<br>
-          Asia Food — Japanisches Sushi<br>
-          84032 Landshut
-        </address>
-      </div>
-    </footer>
-  </main>
+        <div class="menu-items" id="getraenke-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+    </main>
 
 
-  <!-- Warenkorb-Button (immer sichtbar) -->
-  <div id="cart-button" onclick="toggleCart()">
-    🛒 <span id="cart-count">0</span>
-  </div>
-
-  <!-- Seitenpanel / Sticky Warenkorb -->
-  <div id="cart-sidebar">
-    <div class="cart-header">
-      <h3>Dein Warenkorb</h3>
-      <button id="close-cart" onclick="toggleCart()">✕</button>
+    <!-- Warenkorb-Button (immer sichtbar) -->
+    <div id="cart-button" onclick="toggleCart()">
+      🛒 <span id="cart-count">0</span>
     </div>
-    <ul id="cart-items"></ul>
-    <div class="cart-footer">
-      <p><strong>Summe:</strong> <span id="cart-total">0,00 €</span></p>
-      <button onclick="checkout()">Zur Kasse</button>
+
+    <!-- Seitenpanel / Sticky Warenkorb -->
+    <div id="cart-sidebar">
+      <div class="cart-header">
+        <h3>Dein Warenkorb</h3>
+        <button id="close-cart" onclick="toggleCart()">✕</button>
+      </div>
+      <ul id="cart-items"></ul>
+      <div class="cart-footer">
+        <p><strong>Summe:</strong> <span id="cart-total">0,00 €</span></p>
+        <button onclick="checkout()">Zur Kasse</button>
+      </div>
     </div>
-  </div>
 
 
 </body>
