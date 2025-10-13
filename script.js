@@ -36,3 +36,24 @@ function renderCart() {
 function checkout() {
   alert("Weiter zur Kasse");
 }
+
+function renderArticlesByCategory(articles, containerSelector) {
+  const categories = [
+    "Vorspeisen",
+    "Suppen",
+    "Salate",
+    "Sushi - Maki",
+    "Desserts",
+    "Getränke",
+  ];
+  categories.forEach((cat) => {
+    const catContainer = document.querySelector(
+      containerSelector + `[data-category="${cat}"]`
+    );
+    const filteredArticles = articles.filter((a) => a.kategorie === cat);
+    filteredArticles.forEach((item) => {
+      // Template-Rendering oder direktes HTML anhängen
+      catContainer.innerHTML += `<div>${item.name}</div>`;
+    });
+  });
+}
