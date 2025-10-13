@@ -140,18 +140,57 @@
       🛒 <span id="cart-count">0</span>
     </div>
 
-    <!-- Seitenpanel / Sticky Warenkorb -->
-    <div id="cart-sidebar">
-      <div class="cart-header">
-        <h3>Dein Warenkorb</h3>
-        <button id="close-cart" onclick="toggleCart()">✕</button>
+
+    <div id="cart-sidebar" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
+      <h2 id="cart-title" style="color: var(--primary); margin-bottom: 1rem;">Dein Warenkorb</h2>
+
+      <ul id="cart-items"
+        style="list-style: none; padding-left: 0; flex-grow: 1; overflow-y: auto; margin-bottom: 1.5rem;">
+        <!-- Hier werden die Artikel eingehängt -->
+      </ul>
+
+      <fieldset style="border: none; margin-bottom: 1.5rem;">
+        <legend style="font-weight: 700; margin-bottom: 0.5rem;">Lieferoption wählen</legend>
+        <label
+          style="display: inline-flex; align-items: center; cursor: pointer; margin-right: 1.5rem; color: var(--text-primary);">
+          <input type="radio" name="delivery-option" value="abholung" checked
+            style="margin-right: 0.5rem; cursor: pointer;">
+          Abholung (0,00 €)
+        </label>
+        <label style="display: inline-flex; align-items: center; cursor: pointer; color: var(--text-primary);">
+          <input type="radio" name="delivery-option" value="lieferung" style="margin-right: 0.5rem; cursor: pointer;">
+          Lieferung (+4,99 € unter 30 €)
+        </label>
+      </fieldset>
+
+      <div style="font-size: 1rem; line-height: 1.4; color: var(--text-primary); margin-bottom: 1rem;">
+        <div>
+          <strong>Zwischensumme:</strong> <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div>
+          <strong>Lieferkosten:</strong> <span id="delivery-costs">0,00 €</span>
+        </div>
+        <div style="margin-top: 0.5rem; font-size: 1.2rem; font-weight: 700; color: var(--primary);">
+          <strong>Gesamtsumme:</strong> <span id="cart-total">0,00 €</span>
+        </div>
       </div>
-      <ul id="cart-items"></ul>
-      <div class="cart-footer">
-        <p><strong>Summe:</strong> <span id="cart-total">0,00 €</span></p>
-        <button onclick="checkout()">Zur Kasse</button>
-      </div>
+
+      <button id="checkout-btn" onclick="checkout()" style="
+    background-color: var(--primary);
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 100%;
+    transition: background-color var(--transition);
+  " onmouseover="this.style.backgroundColor='#b71c1c'" onmouseout="this.style.backgroundColor='var(--primary)'">
+        Zur Kasse
+      </button>
     </div>
+
 
 
 </body>

@@ -183,3 +183,46 @@ function filterMenuItems(term) {
 function initCart() {
   // init cart functionality
 }
+
+let deliveryOption = "abholung"; // Standard auf Abholung
+
+// Eventlistener für Optionschange
+document.querySelectorAll('input[name="delivery-option"]').forEach((radio) => {
+  radio.addEventListener("change", (e) => {
+    deliveryOption = e.target.value;
+    renderCart(); // erneutes Rendering der Preise
+  });
+});
+
+function renderCart() {
+  cartList.innerHTML = "";
+  let subtotal = 0;
+  cartItems.forEach((item, index) => {
+    subtotal += item.price;
+    const li = document.createElement("li");
+    li.innerHTML = `
+  <span class="cart-item-name">${item.name}</span>
+  <span class="cart-item-price">${item.price.toFixed(2)} €</span>
+  <button aria-label="Artikel entfernen" onclick="removeFromCart(${index})" class="remove-btn">❌</button>
+`;
+    cartList.appendChild(li);
+  });
+
+  // Update Zwischensumme
+  document.getElementById("cart-subtotal").textContent =
+    subtotal.toFixed(2) + " €";
+
+  // Versandkosten berechnen
+  let deliveryCosts = 0;
+  if (deliveryOption === "lieferung") {
+    deliveryCosts = subtotal >= 30 ? 0 : 4.99;
+  }
+  document.getElementById("delivery-costs").textContent =
+    deliveryCosts.toFixed(2) + " €";
+
+  // Gesamtsumme
+  const total = subtotal + deliveryCosts;
+  document.getElementById("cart-total").textContent = total.toFixed(2) + " €";
+
+  cartCount.textContent = cartItems.length;
+}
