@@ -81,7 +81,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #f5f5f5;
+  background-color: #ff8000;
   border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
@@ -257,26 +257,27 @@ body {
 
 /* Hero styling */
 .restaurant-hero {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.95),
-    rgba(255, 255, 255, 0.95)
-  );
-  padding: 28px 0;
+  background-image: url("./assets/img/sushi-roll-images-4395598.webp");
+  background-position: center;
+  padding: 128px 0;
 }
 .hero-inner {
   display: flex;
   gap: 20px;
   align-items: center;
+  color: white;
 }
 .hero-left h1 {
   margin: 0 0 6px 0;
   font-size: 1.6rem;
+  color: white;
 }
 .hero-left .meta {
   color: var(--muted);
   margin-bottom: 6px;
+  color: white;
 }
+
 .hero-right img {
   width: 140px;
   height: 100px;
@@ -304,6 +305,7 @@ body {
   margin: 0;
   padding: 10px 16px;
   overflow-x: auto;
+  justify-content: center;
 }
 .categories a {
   display: inline-block;
@@ -605,3 +607,123 @@ footer {
    ============================== */
 /* JavaScript wurde entfernt: Interaktive Logik befindet sich nun in `script.js`.
    Diese Datei gehört nur zu CSS-Styling. */
+/* Sticky Button */
+#cart-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ff9800;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+#cart-button:hover {
+  background-color: #e68900;
+}
+
+/* Warenkorb-Button */
+#cart-button {
+  position: fixed;
+   right: 20px;
+  background-color: #ff9800;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1100;
+  transition: all 0.3s ease;
+}
+
+#cart-button:hover {
+  background-color: #e68900;
+}
+
+/* Sidebar (geschlossen) */
+#cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px; /* Versteckt */
+  width: 400px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: right 0.4s ease;
+  z-index: 1099;
+}
+
+/* Sidebar offen */
+#cart-sidebar.open {
+  right: 0;
+}
+
+/* Header */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-header h3 {
+  margin: 0;
+}
+
+#close-cart {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Artikel-Liste */
+#cart-items {
+  flex-grow: 1;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+#cart-items li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Footer */
+.cart-footer {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.cart-footer button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-footer button:hover {
+  background-color: #45a049;
+}
+
+/* Beispiel-Button */
+.add-btn {
+  margin: 100px;
+  pad

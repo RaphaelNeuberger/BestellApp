@@ -47,7 +47,7 @@
           <img src="./assets/img/Logo.png" alt="Vina Food Logo" height="44" />
         </a>
         <div class="restaurant-name">
-          <strong>Vina Food — Sushi &amp; Vietnamesische Küche</strong>
+          <strong>Asia Food — Japanisches Sushi &amp; Vietnamesische Küche</strong>
           <div class="restaurant-meta">Oberndorferstraße 22 · Landshut</div>
         </div>
       </div>
@@ -77,7 +77,7 @@
 
         <div class="hero-right">
           <!-- Platzhalterbild; später mit CSS skaliert -->
-          <img src="placeholder-restaurant.jpg" alt="Außenansicht Vina Food" />
+          <img src="./assets/img/sushi-7372852_1920.webp" alt="Außenansicht Vina Food" />
           <div class="cta">Jetzt bestellen</div>
         </div>
       </div>
@@ -92,7 +92,7 @@
         <li><a href="#salate">Salate</a></li>
         <li><a href="#sushi-maki">Sushi - Maki</a></li>
         <li><a href="#desserts">Desserts</a></li>
-        <li><a href="#getraenke">Getränke</a></li>
+        <li><a href="#drinks">Getränke</a></li>
       </ul>
     </nav>
 
@@ -117,70 +117,18 @@
                 <div class="menu-actions">
                   <div class="price">4,99 €</div>
                   <div>
-                    <button class="like-button" aria-label="Favorit">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path
-                          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
-                          stroke="currentColor" stroke-width="0.6" fill="currentColor" />
-                      </svg>
+                    <button class="add-btn" onclick="addToCart('Pizza Margherita', 8.99)">
+                      + In den Warenkorb
                     </button>
-                    <button class="add-btn">+</button>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="menu-item">
-              <img src="./assets/img/Logo.png" alt="Banh Phong Tom" />
-              <div class="menu-info">
-                <div>
-                  <h3 class="item-title">Banh Phong Tom</h3>
-                  <p class="item-desc">Krabbenchips</p>
-                </div>
-                <div class="menu-actions">
-                  <div class="price">3,50 €</div>
-                  <div>
-                    <button class="like-button" aria-label="Favorit">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path
-                          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
-                          stroke="currentColor" stroke-width="0.6" fill="currentColor" />
-                      </svg>
-                    </button>
-                    <button class="add-btn">+</button>
-                  </div>
-                </div>
-              </div>
-            </article>
 
-            <article class="menu-item">
-              <img src="./assets/img/Bestell App- Logo.svg" alt="Sommerrollen" />
-              <div class="menu-info">
-                <div>
-                  <h3 class="item-title">Sommerrollen (2 Stück)</h3>
-                  <p class="item-desc">mit Hähnchen und Kräutern</p>
-                </div>
-                <div class="menu-actions">
-                  <div class="price">5,20 €</div>
-                  <div>
-                    <button class="like-button" aria-label="Favorit">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path
-                          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
-                          stroke="currentColor" stroke-width="0.6" fill="currentColor" />
-                      </svg>
-                    </button>
-                    <button class="add-btn">+</button>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <!-- Weiter Items... (kannst du später kopieren/erweitern) -->
           </div>
-
-
-          <!-- Weiter Items... (kannst du später kopieren/erweitern) -->
         </div>
-      </div>
     </section>
 
 
@@ -200,46 +148,53 @@
       </div>
     </section>
 
+    <section id="desserts" class="menu-section">
+      <div class="container">
+        <h2>Desserts</h2>
+        <!-- Platz für Items -->
+      </div>
+    </section>
+
+    <section id="drinks" class="menu-section">
+      <div class="container">
+        <h2>Getränke</h2>
+        <!-- Platz für Items -->
+      </div>
+    </section>
 
     <!-- Impressum / Footer-Bereich -->
-    <footer id="impressum">
+    <footer id="impressum" role="contentinfo">
       <div class="container footer-inner">
-        <h3>Impressum</h3>
+        <h3>Restaurant</h3>
         <address>
-          Vina Food Sushi &amp; Vietnamesische Küche<br>
-          NYSA Essen und Trinken Service GmbH<br>
-          Seligenthaler Strasse 8<br>
-          84034 Landshut
+          Asia Food — Japanisches Sushi &amp; Vietnamesische Küche<br>
+          Asia Food — Japanisches Sushi<br>
+          84032 Landshut
         </address>
       </div>
     </footer>
   </main>
 
-  <footer role="contentinfo"></footer>
-  <!-- Sticky mini-cart: persistent until user closes -->
-  <div id="sticky-cart" class="sticky-cart" aria-hidden="true" aria-live="polite">
-    <div class="sticky-info">In Warenkorb: <span class="sticky-count">0</span> • <span class="sticky-total"
-        aria-live="polite">0,00
-        €</span></div>
-    <div class="sticky-actions">
-      <button id="sticky-open" class="add-btn">Warenkorb anzeigen</button>
-      <button id="sticky-close" class="close-btn" aria-label="Sticky schließen">×</button>
+
+  <!-- Warenkorb-Button (immer sichtbar) -->
+  <div id="cart-button" onclick="toggleCart()">
+    🛒 <span id="cart-count">0</span>
+  </div>
+
+  <!-- Seitenpanel / Sticky Warenkorb -->
+  <div id="cart-sidebar">
+    <div class="cart-header">
+      <h3>Dein Warenkorb</h3>
+      <button id="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <ul id="cart-items"></ul>
+    <div class="cart-footer">
+      <p><strong>Summe:</strong> <span id="cart-total">0,00 €</span></p>
+      <button onclick="checkout()">Zur Kasse</button>
     </div>
   </div>
-  <!-- Cart Drawer -->
-  <aside id="cart-drawer" role="dialog" aria-hidden="true" aria-labelledby="cart-title" tabindex="-1">
-    <div class="cart-header">
-      <h3 id="cart-title">Warenkorb</h3>
-      <button id="cart-close" aria-label="Warenkorb schließen">×</button>
-    </div>
-    <div class="cart-body">
-      <ul class="cart-items"></ul>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">Gesamt: <span class="cart-total-value">0,00 €</span></div>
-      <button class="checkout-btn">Zur Kasse</button>
-    </div>
-  </aside>
+
+
 </body>
 
 </html>
