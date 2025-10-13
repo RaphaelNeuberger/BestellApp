@@ -877,7 +877,7 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+  
 
 .menu-item-info h3 {
   color: var(--primary-color);
@@ -1317,5 +1317,5 @@ button#checkout-btn:focus {
 
  .search{
   width: 100%;
-  height: 20px;
+  height: ;
  }
