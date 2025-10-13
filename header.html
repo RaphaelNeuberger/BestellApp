@@ -1,18 +1,25 @@
-<div><a href="index.html"><img class="logo" src="./img/logo.png" alt="Logo"></a></div>
-
-<!-- Seitenkopf / Navigation -->
-<header class="site-header">
+<!-- Seitenkopf / Navigation (Nachbau) -->
+<header class="site-header" role="banner">
     <div class="container header-inner">
-        <!-- Logo (Platzhalter) -->
-        <a class="logo" href="#">Lieferando‑Nachbau</a>
+        <div class="header-left">
+            <a class="logo" href="index.html">
+                <img src="./assets/img/Logo.png" alt="Vina Food Logo" height="44" />
+            </a>
+            <div class="restaurant-name">
+                <strong>Vina Food — Sushi &amp; Vietnamesische Küche</strong>
+                <div class="restaurant-meta">Oberndorferstraße 22 · Landshut</div>
+            </div>
+        </div>
 
-
-        <!-- Suchfeld / Benutzeraktionen (vereinfacht) -->
-        <nav class="main-nav" aria-label="Hauptnavigation">
-            <ul>
-                <li><a href="#kontakt">Kontakt</a></li>
-                <li><a href="#impressum">Impressum</a></li>
-            </ul>
-        </nav>
+        <div class="header-right">
+            <div class="search-placeholder">Suche Gerichte oder Menü</div>
+            <button class="cart-btn" aria-label="Warenkorb">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span class="cart-count">0</span>
+            </button>
+        </div>
     </div>
 </header>

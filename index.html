@@ -1,59 +1,245 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Projektname</title>
-    <meta
-      name="description"
-      content="Kurze Beschreibung der Website oder App" />
-    <meta name="author" content="Dein Name" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#ffffff" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Projektname" />
-    <meta property="og:description" content="Beschreibung der Seite" />
-    <meta property="og:image" content="./img/preview.png" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://example.com" />
+  <title>Projektname</title>
+  <meta name="description" content="Kurze Beschreibung der Website oder App" />
+  <meta name="author" content="Dein Name" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#ffffff" />
 
-    <!-- Favicons -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./assets/icons/apple-touch-icon.png" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/icons/favicon-32x32.png" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./assets/icons/favicon-16x16.png" />
-    <link rel="manifest" href="./site.webmanifest" />
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Projektname" />
+  <meta property="og:description" content="Beschreibung der Seite" />
+  <meta property="og:image" content="./img/preview.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./styles/standard.css" />
-    <link rel="stylesheet" href="./styles/assets.css" />
-    <link rel="stylesheet" href="./styles/fonts.css" />
-    <link rel="stylesheet" href="./style.css" />
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16x16.png" />
+  <link rel="manifest" href="./site.webmanifest" />
 
-    <!-- JS (defer für bessere Performance) -->
-    <script src="./scripts/templates.js" defer></script>
-    <script src="./script.js" defer></script>
-  </head>
+  <!-- CSS -->
+  <!-- <link rel="stylesheet" href="./styles/standard.css" /> -->
+  <link rel="stylesheet" href="./styles/assets.css" />
+  <link rel="stylesheet" href="./styles/fonts.css" />
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
 
-  <body>
-    <header role="banner">
-      <nav header-html="./header.html" role="navigation"></nav>
-    </header>
+  <!-- JS (defer für bessere Performance) -->
+  <script src="./scripts/templates.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
 
-    <main role="main"></main>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <!-- Inline header (vormals in header.html) -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="header-left">
+        <a class="logo" href="index.html">
+          <img src="./assets/img/Logo.png" alt="Vina Food Logo" height="44" />
+        </a>
+        <div class="restaurant-name">
+          <strong>Vina Food — Sushi &amp; Vietnamesische Küche</strong>
+          <div class="restaurant-meta">Oberndorferstraße 22 · Landshut</div>
+        </div>
+      </div>
 
-    <footer role="contentinfo"></footer>
-  </body>
+      <div class="header-right">
+        <div class="search-placeholder">Suche Gerichte oder Menü</div>
+        <button class="cart-btn" aria-label="Warenkorb" aria-describedby="cart-count">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <span id="cart-count" class="cart-count" aria-live="polite" aria-atomic="true">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main"><!-- Hero / Restaurant-Kopfzeile -->
+    <section class="restaurant-hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1>Asia Food — Japanisches Sushi &amp; Vietnamesische Küche</h1>
+          <p class="meta">Asia • Sushi • Vietnamesisch</p>
+          <p class="address">Oberndorferstraße 22, 84032 Landshut</p>
+        </div>
+
+
+        <div class="hero-right">
+          <!-- Platzhalterbild; später mit CSS skaliert -->
+          <img src="placeholder-restaurant.jpg" alt="Außenansicht Vina Food" />
+          <div class="cta">Jetzt bestellen</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Kategorie-Navigation (Ankerlinks zu den Sektionen) -->
+    <nav class="categories" aria-label="Speisekategorien">
+      <ul>
+        <li><a href="#vorspeisen">Vorspeisen</a></li>
+        <li><a href="#suppen">Suppen</a></li>
+        <li><a href="#salate">Salate</a></li>
+        <li><a href="#sushi-maki">Sushi - Maki</a></li>
+        <li><a href="#desserts">Desserts</a></li>
+        <li><a href="#getraenke">Getränke</a></li>
+      </ul>
+    </nav>
+
+
+    <!-- Beispiel-Speisekategorie mit Artikeln -->
+    <section id="vorspeisen" class="menu-section">
+      <div class="container">
+        <h2>Vorspeisen</h2>
+        <p class="count">15 Artikel</p>
+
+
+        <div class="menu-items">
+          <!-- Jedes Menü-Item als <article> für Semantik -->
+          <div class="menu-list">
+            <article class="menu-item">
+              <img src="./assets/img/Bestell App- Logo.svg" alt="Mini Frühlingsrollen" />
+              <div class="menu-info">
+                <div>
+                  <h3 class="item-title">Mini Frühlingsrollen (6 Stück)</h3>
+                  <p class="item-desc">mit Gemüsefüllung</p>
+                </div>
+                <div class="menu-actions">
+                  <div class="price">4,99 €</div>
+                  <div>
+                    <button class="like-button" aria-label="Favorit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path
+                          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+                          stroke="currentColor" stroke-width="0.6" fill="currentColor" />
+                      </svg>
+                    </button>
+                    <button class="add-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <img src="./assets/img/Logo.png" alt="Banh Phong Tom" />
+              <div class="menu-info">
+                <div>
+                  <h3 class="item-title">Banh Phong Tom</h3>
+                  <p class="item-desc">Krabbenchips</p>
+                </div>
+                <div class="menu-actions">
+                  <div class="price">3,50 €</div>
+                  <div>
+                    <button class="like-button" aria-label="Favorit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path
+                          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+                          stroke="currentColor" stroke-width="0.6" fill="currentColor" />
+                      </svg>
+                    </button>
+                    <button class="add-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <img src="./assets/img/Bestell App- Logo.svg" alt="Sommerrollen" />
+              <div class="menu-info">
+                <div>
+                  <h3 class="item-title">Sommerrollen (2 Stück)</h3>
+                  <p class="item-desc">mit Hähnchen und Kräutern</p>
+                </div>
+                <div class="menu-actions">
+                  <div class="price">5,20 €</div>
+                  <div>
+                    <button class="like-button" aria-label="Favorit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path
+                          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+                          stroke="currentColor" stroke-width="0.6" fill="currentColor" />
+                      </svg>
+                    </button>
+                    <button class="add-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+
+          <!-- Weiter Items... (kannst du später kopieren/erweitern) -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Weitere Kategorien: Suppen, Salate, Hauptgerichte, Sushi etc. -->
+    <section id="suppen" class="menu-section">
+      <div class="container">
+        <h2>Suppen</h2>
+        <!-- Platz für Items -->
+      </div>
+    </section>
+
+
+    <section id="sushi-maki" class="menu-section">
+      <div class="container">
+        <h2>Sushi - Maki</h2>
+        <!-- Platz für Items -->
+      </div>
+    </section>
+
+
+    <!-- Impressum / Footer-Bereich -->
+    <footer id="impressum">
+      <div class="container footer-inner">
+        <h3>Impressum</h3>
+        <address>
+          Vina Food Sushi &amp; Vietnamesische Küche<br>
+          NYSA Essen und Trinken Service GmbH<br>
+          Seligenthaler Strasse 8<br>
+          84034 Landshut
+        </address>
+      </div>
+    </footer>
+  </main>
+
+  <footer role="contentinfo"></footer>
+  <!-- Sticky mini-cart: persistent until user closes -->
+  <div id="sticky-cart" class="sticky-cart" aria-hidden="true" aria-live="polite">
+    <div class="sticky-info">In Warenkorb: <span class="sticky-count">0</span> • <span class="sticky-total"
+        aria-live="polite">0,00
+        €</span></div>
+    <div class="sticky-actions">
+      <button id="sticky-open" class="add-btn">Warenkorb anzeigen</button>
+      <button id="sticky-close" class="close-btn" aria-label="Sticky schließen">×</button>
+    </div>
+  </div>
+  <!-- Cart Drawer -->
+  <aside id="cart-drawer" role="dialog" aria-hidden="true" aria-labelledby="cart-title" tabindex="-1">
+    <div class="cart-header">
+      <h3 id="cart-title">Warenkorb</h3>
+      <button id="cart-close" aria-label="Warenkorb schließen">×</button>
+    </div>
+    <div class="cart-body">
+      <ul class="cart-items"></ul>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">Gesamt: <span class="cart-total-value">0,00 €</span></div>
+      <button class="checkout-btn">Zur Kasse</button>
+    </div>
+  </aside>
+</body>
+
 </html>
