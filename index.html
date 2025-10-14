@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vina Food - Sushi & Vietnamesische Küche Landshut</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/img/logo.png">
+
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#ff8000">
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menü öffnen">☰</button>
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="./assets/img/logo.png" alt="Vina Food Logo">
+        <h1>Vina Food</h1>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="#vorspeisen">Vorspeisen</a></li>
+          <li><a href="#suppen">Suppen</a></li>
+          <li><a href="#salate">Salate</a></li>
+          <li><a href="#sushi-maki">Sushi</a></li>
+          <li><a href="#desserts">Desserts</a></li>
+          <li><a href="#getraenke">Getränke</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Right -->
+      <div class="header-right">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Theme wechseln">
+          <span class="theme-icon" id="theme-icon">🌙</span>
+          <span class="theme-text" id="theme-text">Dark</span>
+        </button>
+
+        <!-- Cart Button (Desktop) -->
+        <button class="cart-btn desktop-cart-btn" onclick="toggleCart()" aria-label="Warenkorb öffnen">
+          🛒 <span id="cart-count-desktop">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="header-bottom">
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="search-input" placeholder="Suche Gerichte oder Menü...">
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section mit Restaurant-Bild und Logo (wie bei Lieferando) -->
+  <section class="restaurant-hero">
+    <div class="hero-overlay">
+      <div class="container">
+        <div class="hero-content">
+          <!-- Logo über dem Bild (Lieferando-Style) -->
+          <div class="hero-logo">
+            <img src="./assets/img/logo.png" alt="Vina Food Logo">
+          </div>
+
+          <!-- Restaurant Info -->
+          <div class="restaurant-info">
+            <h1>Vina Food Sushi & Vietnamesische Küche</h1>
+
+            <!-- Bewertung mit Sternen -->
+            <div class="rating">
+              <div class="stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <span class="rating-text">4.2 (127 Bewertungen)</span>
+            </div>
+
+            <!-- Restaurant Details -->
+            <div class="restaurant-details">
+              <p class="address">📍 Oberndorferstraße 22, 84032 Landshut</p>
+              <p class="delivery-info">🚚 Lieferung: 30-45 Min • Ab 30€ versandkostenfrei • Sonst 4,99€</p>
+              <p class="opening-hours">🕒 Geöffnet: Mo-Sa 11:00-22:00, So 12:00-21:00 Uhr</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Navigation (Gerichteslider) -->
+  <nav class="categories" aria-label="Kategorien">
+    <div class="container">
+      <ul>
+        <li><a href="#vorspeisen" class="category-link active">🥟 Vorspeisen</a></li>
+        <li><a href="#suppen" class="category-link">🍜 Suppen</a></li>
+        <li><a href="#salate" class="category-link">🥗 Salate</a></li>
+        <li><a href="#sushi-maki" class="category-link">🍣 Sushi - Maki</a></li>
+        <li><a href="#desserts" class="category-link">🍮 Desserts</a></li>
+        <li><a href="#getraenke" class="category-link">🥤 Getränke</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Vorspeisen -->
+    <section id="vorspeisen" class="menu-section">
+      <h2>🥟 Vorspeisen</h2>
+      <div id="vorspeisen-container" class="menu-items"></div>
+    </section>
+
+    <!-- Suppen -->
+    <section id="suppen" class="menu-section">
+      <h2>🍜 Suppen</h2>
+      <div id="suppen-container" class="menu-items"></div>
+    </section>
+
+    <!-- Salate -->
+    <section id="salate" class="menu-section">
+      <h2>🥗 Salate</h2>
+      <div id="salate-container" class="menu-items"></div>
+    </section>
+
+    <!-- Sushi - Maki -->
+    <section id="sushi-maki" class="menu-section">
+      <h2>🍣 Sushi - Maki</h2>
+      <div id="sushi-maki-container" class="menu-items"></div>
+    </section>
+
+    <!-- Desserts -->
+    <section id="desserts" class="menu-section">
+      <h2>🍮 Desserts</h2>
+      <div id="desserts-container" class="menu-items"></div>
+    </section>
+
+    <!-- Getränke -->
+    <section id="getraenke" class="menu-section">
+      <h2>🥤 Getränke</h2>
+      <div id="getraenke-container" class="menu-items"></div>
+    </section>
+  </main>
+
+  <!-- Desktop Warenkorb Sidebar (Sticky) -->
+  <aside id="cart-sidebar" role="dialog" aria-modal="true" tabindex="-1" class="cart-sidebar">
+    <!-- Header mit Titel und X-Button -->
+    <div class="cart-header">
+      <h2 id="cart-title">Dein Warenkorb</h2>
+      <button id="close-cart" class="close-cart-btn" onclick="toggleCart()" aria-label="Warenkorb schließen">✕</button>
+    </div>
+
+    <!-- Warenkorb Inhalt -->
+    <div class="cart-body">
+      <ul id="cart-items"></ul>
+
+      <!-- Lieferoptionen -->
+      <fieldset class="delivery-options">
+        <legend>Lieferoption wählen</legend>
+        <label>
+          <input type="radio" name="delivery-option" value="abholung" checked>
+          🏪 Abholung (0,00 €)
+        </label>
+        <label>
+          <input type="radio" name="delivery-option" value="lieferung">
+          🚚 Lieferung (+4,99 € unter 30 €)
+        </label>
+      </fieldset>
+    </div>
+
+    <!-- Footer mit Preisen -->
+    <div class="cart-footer">
+      <div class="cart-totals">
+        <div class="subtotal-line">
+          <span>Zwischensumme:</span>
+          <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div class="delivery-line">
+          <span>Lieferkosten:</span>
+          <span id="delivery-costs">0,00 €</span>
+        </div>
+        <div class="total-line">
+          <span>Gesamtsumme:</span>
+          <span id="cart-total">0,00 €</span>
+        </div>
+      </div>
+
+      <button id="checkout-btn" onclick="checkout()" class="checkout-btn" disabled>
+        🛒 Jetzt bestellen
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Warenkorb Button (Responsive, unten mittig) -->
+  <button id="mobile-cart-btn" class="mobile-cart-btn" onclick="toggleCart()" aria-label="Warenkorb öffnen"
+    style="display: none;">
+    <span class="cart-icon">🛒</span>
+    <span class="cart-info">
+      <span id="cart-count-mobile">0</span> Artikel
+    </span>
+    <span class="cart-total-mobile" id="cart-total-mobile">0,00 €</span>
+  </button>
+
+  <!-- Bestellbestätigung Modal (kein Alert!) -->
+  <div id="order-confirmation" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>✅ Testbestellung erfolgreich!</h3>
+        <button class="modal-close" onclick="closeOrderConfirmation()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>Vielen Dank für Ihre <strong>Testbestellung</strong>!</p>
+        <p>Dies war nur eine Demonstration der App-Funktionalität.</p>
+        <div class="order-summary" id="order-summary"></div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeOrderConfirmation()" class="btn-primary">Verstanden</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Vina Food</h4>
+          <p>Authentische vietnamesische Küche und frisches Sushi in Landshut</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Kontakt</h4>
+          <p>📍 Oberndorferstraße 22, 84032 Landshut</p>
+          <p>📞 +49 (871) 123456</p>
+          <p>✉️ info@vina-food-landshut.de</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Öffnungszeiten</h4>
+          <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+          <p>So: 12:00 - 21:00 Uhr</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Vina Food Landshut. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="data.js"></script>
+  <script src="./scripts/templates.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
