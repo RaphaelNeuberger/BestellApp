@@ -1917,3 +1917,39 @@ footer {
 [data-color-scheme="dark"] ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-secondary);
 }
+/* Dark Mode: Kategorien-Leiste sticky mit Hintergrund */
+[data-theme="dark"] .categories {
+  position: sticky !important;
+  top: var(--header-height) !important;
+  z-index: 90 !important;
+  background: #1a1a1a !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+/* Dark Mode: Kategorie-Schrift weiß */
+[data-theme="dark"] .categories ul a,
+[data-theme="dark"] .categories .category-link {
+  color: #fff !important;
+}
+
+/* Dark Mode: Menu-Items Hintergrund & Beschreibungstext anpassen */
+[data-theme="dark"] .menu-item {
+  background-color: var(--surface) !important; /* dunkles Surface */
+  border-color: var(--border-color) !important;
+}
+[data-theme="dark"] .menu-item h3 {
+  color: #fff !important; /* Überschrift weiß */
+}
+[data-theme="dark"] .menu-item .description {
+  color: #ddd !important; /* Beschreibung hellgrau/weiß */
+}
+
+/*  Dark Mode */
+[data-theme="dark"] body {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] * {
+  border-color: #404040 !important;
+}
