@@ -1,228 +1,391 @@
+/* ==============================================
+   VINA FOOD — BESTELLAPP JAVASCRIPT
+   ============================================== */
+
+// ==============================
+// GLOBALE VARIABLEN
+// ==============================
 let cartItems = [];
-const cartSidebar = document.getElementById("cart-sidebar");
-const cartList = document.getElementById("cart-items");
-const cartCount = document.getElementById("cart-count");
-const cartTotal = document.getElementById("cart-total");
+let deliveryOption = "abholung";
 
-function toggleCart() {
-  cartSidebar.classList.toggle("open");
-}
+// DOM Elemente
+const DOM = {
+  cartSidebar: document.getElementById("cart-sidebar"),
+  cartList: document.getElementById("cart-items"),
+  cartCount: document.getElementById("cart-count"),
+  cartTotal: document.getElementById("cart-total"),
+  cartSubtotal: document.getElementById("cart-subtotal"),
+  deliveryCosts: document.getElementById("delivery-costs"),
+  searchInput: document.getElementById("search-input"),
+};
 
-function addToCart(name, price) {
-  // Preis von Cents in Euro umrechnen
-  const priceInEuro = price / 100;
-  cartItems.push({ name, price: priceInEuro });
-  renderCart();
-  // Sidebar automatisch öffnen
-  cartSidebar.classList.add("open");
-}
+// ==============================
+// WARENKORB MODULE
+// ==============================
+const Cart = {
+  // Warenkorb öffnen/schließen
+  toggle() {
+    DOM.cartSidebar.classList.toggle("open");
+  },
 
-function renderCart() {
-  cartList.innerHTML = "";
-  let total = 0;
-  cartItems.forEach((item, index) => {
-    total += item.price;
-    const li = document.createElement("li");
-    li.innerHTML = `
-            <span>${item.name}</span>
-            <span>${item.price.toFixed(2)} €</span>
-            <button onclick="removeFromCart(${index})">×</button>
-        `;
-    cartList.appendChild(li);
-  });
-  cartCount.textContent = cartItems.length;
-  cartTotal.textContent = total.toFixed(2) + " €";
-}
+  // Artikel hinzufügen
+  addItem(name, price) {
+    const priceInEuro = price / 100;
+    cartItems.push({ name, price: priceInEuro });
+    this.render();
+    this.saveToStorage();
+    DOM.cartSidebar.classList.add("open");
+  },
 
-function removeFromCart(index) {
-  cartItems.splice(index, 1);
-  renderCart();
-}
+  // Artikel entfernen
+  removeItem(index) {
+    cartItems.splice(index, 1);
+    this.render();
+    this.saveToStorage();
+  },
 
-function checkout() {
-  alert("Weiter zur Kasse");
-}
+  // Warenkorb anzeigen
+  render() {
+    if (!DOM.cartList) return;
 
-// Korrigierte Render-Funktion
-function renderMenuItems() {
-  const categoryMapping = {
+    // Liste leeren
+    DOM.cartList.innerHTML = "";
+    let subtotal = 0;
+
+    // Artikel durchlaufen
+    cartItems.forEach((item, index) => {
+      subtotal += item.price;
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <span class="cart-item-name">${item.name}</span>
+        <span class="cart-item-price">${item.price.toFixed(2)} €</span>
+        <button aria-label="Artikel entfernen" onclick="Cart.removeItem(${index})" class="remove-btn">❌</button>
+      `;
+      DOM.cartList.appendChild(li);
+    });
+
+    // Versandkosten berechnen
+    const deliveryCosts = this.calculateDeliveryFee(subtotal);
+    const total = subtotal + deliveryCosts;
+
+    // UI aktualisieren
+    this.updateUI(subtotal, deliveryCosts, total);
+  },
+
+  // Versandkosten berechnen
+  calculateDeliveryFee(subtotal) {
+    if (deliveryOption === "lieferung") {
+      return subtotal >= 30 ? 0 : 4.99;
+    }
+    return 0;
+  },
+
+  // UI-Elemente aktualisieren
+  updateUI(subtotal, deliveryCosts, total) {
+    if (DOM.cartSubtotal)
+      DOM.cartSubtotal.textContent = `${subtotal.toFixed(2)} €`;
+    if (DOM.deliveryCosts)
+      DOM.deliveryCosts.textContent = `${deliveryCosts.toFixed(2)} €`;
+    if (DOM.cartTotal) DOM.cartTotal.textContent = `${total.toFixed(2)} €`;
+    if (DOM.cartCount) DOM.cartCount.textContent = cartItems.length;
+  },
+
+  // LocalStorage speichern
+  saveToStorage() {
+    localStorage.setItem("vina_cart_v1", JSON.stringify(cartItems));
+  },
+
+  // LocalStorage laden
+  loadFromStorage() {
+    const savedCart = localStorage.getItem("vina_cart_v1");
+    if (savedCart) {
+      cartItems = JSON.parse(savedCart);
+      this.render();
+    }
+  },
+
+  // Lieferoption ändern
+  setDeliveryOption(option) {
+    deliveryOption = option;
+    this.render();
+  },
+};
+
+// ==============================
+// MENU MODULE
+// ==============================
+const Menu = {
+  // Kategorie-Mapping
+  categoryMapping: {
     vorspeisen: "Vorspeisen",
     suppen: "Suppen",
     salate: "Salate",
     sushiMaki: "Sushi - Maki",
     desserts: "Desserts",
     getraenke: "Getränke",
-  };
+  },
 
-  // Alle Kategorien durchgehen
-  Object.keys(window.MENU_DATA).forEach((categoryKey) => {
-    const categoryName = categoryMapping[categoryKey];
-    const container = document.getElementById(
-      `${categoryKey === "sushiMaki" ? "sushi-maki" : categoryKey}-container`
+  // Alle Menü-Artikel rendern
+  renderItems() {
+    if (!window.MENU_DATA) {
+      console.error("MENU_DATA nicht gefunden!");
+      return;
+    }
+
+    Object.keys(window.MENU_DATA).forEach((categoryKey) => {
+      this.renderCategory(categoryKey);
+    });
+  },
+
+  // Eine Kategorie rendern
+  renderCategory(categoryKey) {
+    const containerSelector =
+      categoryKey === "sushiMaki" ? "sushi-maki" : categoryKey;
+    const container = document.getElementById(`${containerSelector}-container`);
+
+    if (!container || !window.MENU_DATA[categoryKey]) return;
+
+    container.innerHTML = ""; // Container leeren
+
+    window.MENU_DATA[categoryKey].forEach((item) => {
+      const menuItemDiv = this.createMenuItem(item);
+      container.appendChild(menuItemDiv);
+    });
+  },
+
+  // Einzelnen Menü-Artikel erstellen
+  createMenuItem(item) {
+    const menuItemDiv = document.createElement("div");
+    menuItemDiv.className = "menu-item";
+    menuItemDiv.innerHTML = `
+      <div class="menu-item-content">
+        <img src="${item.img}" alt="${item.title}" class="menu-item-image">
+        <div class="menu-item-info">
+          <h3>${item.title}</h3>
+          <p class="description">${item.desc}</p>
+          <div class="price-add">
+            <span class="price">${(item.cents / 100).toFixed(2)} €</span>
+            <button class="add-btn" onclick="Cart.addItem('${item.title}', ${
+      item.cents
+    })">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+    return menuItemDiv;
+  },
+};
+
+// ==============================
+// SUCHE MODULE
+// ==============================
+const Search = {
+  // Suchfunktion initialisieren
+  init() {
+    if (!DOM.searchInput) return;
+
+    DOM.searchInput.addEventListener("input", (e) => {
+      this.filterItems(e.target.value.toLowerCase());
+    });
+  },
+
+  // Artikel nach Suchbegriff filtern
+  filterItems(searchTerm) {
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    menuItems.forEach((item) => {
+      const title = item.querySelector("h3")?.textContent.toLowerCase() || "";
+      const desc =
+        item.querySelector(".description")?.textContent.toLowerCase() || "";
+
+      const isVisible = title.includes(searchTerm) || desc.includes(searchTerm);
+      item.style.display = isVisible ? "" : "none";
+    });
+  },
+};
+
+// ==============================
+// LIEFEROPTIONEN MODULE
+// ==============================
+const Delivery = {
+  // Event Listener für Lieferoptionen
+  init() {
+    const deliveryRadios = document.querySelectorAll(
+      'input[name="delivery-option"]'
     );
 
-    if (container && window.MENU_DATA[categoryKey]) {
-      container.innerHTML = ""; // Container leeren
-
-      window.MENU_DATA[categoryKey].forEach((item) => {
-        const menuItemDiv = document.createElement("div");
-        menuItemDiv.className = "menu-item";
-        menuItemDiv.innerHTML = `
-                    <div class="menu-item-content">
-                        <img src="${item.img}" alt="${
-          item.title
-        }" class="menu-item-image">
-                        <div class="menu-item-info">
-                            <h3>${item.title}</h3>
-                            <p class="description">${item.desc}</p>
-                            <div class="price-add">
-                                <span class="price">${(
-                                  item.cents / 100
-                                ).toFixed(2)} €</span>
-                                <button class="add-btn" onclick="addToCart('${
-                                  item.title
-                                }', ${item.cents})">+</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-        container.appendChild(menuItemDiv);
+    deliveryRadios.forEach((radio) => {
+      radio.addEventListener("change", (e) => {
+        Cart.setDeliveryOption(e.target.value);
       });
+    });
+  },
+};
+
+// ==============================
+// CHECKOUT MODULE
+// ==============================
+const Checkout = {
+  // Zur Kasse gehen
+  process() {
+    if (cartItems.length === 0) {
+      alert("Ihr Warenkorb ist leer!");
+      return;
     }
-  });
+
+    const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+    const deliveryCosts = Cart.calculateDeliveryFee(total);
+    const finalTotal = total + deliveryCosts;
+
+    alert(
+      `Bestellung aufgegeben!\nGesamtsumme: ${finalTotal.toFixed(
+        2
+      )} €\nLieferart: ${deliveryOption}`
+    );
+  },
+};
+
+// ==============================
+// APP INITIALISIERUNG
+// ==============================
+const App = {
+  // App starten
+  init() {
+    this.loadCart();
+    this.loadMenu();
+    this.initModules();
+    this.bindGlobalEvents();
+  },
+
+  // Warenkorb laden
+  loadCart() {
+    Cart.loadFromStorage();
+  },
+
+  // Menü laden
+  loadMenu() {
+    Menu.renderItems();
+  },
+
+  // Module initialisieren
+  initModules() {
+    Search.init();
+    Delivery.init();
+  },
+
+  // Globale Events
+  bindGlobalEvents() {
+    // Warenkorb Toggle Button (falls vorhanden)
+    const cartButton = document.getElementById("cart-button");
+    if (cartButton) {
+      cartButton.addEventListener("click", () => Cart.toggle());
+    }
+  },
+};
+
+// ==============================
+// GLOBALE FUNKTIONEN (für onclick Events)
+// ==============================
+
+// Globale Funktionen für HTML onclick Events
+function toggleCart() {
+  Cart.toggle();
 }
 
-// Warten bis DOM geladen ist, dann Menü rendern
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.MENU_DATA) {
-    renderMenuItems();
-  } else {
-    console.error("MENU_DATA nicht gefunden!");
-  }
-});
-
-// LocalStorage funktionalität
-function saveCartToLocalStorage() {
-  localStorage.setItem("vina_cart_v1", JSON.stringify(cartItems));
-}
-
-function loadCartFromLocalStorage() {
-  const savedCart = localStorage.getItem("vina_cart_v1");
-  if (savedCart) {
-    cartItems = JSON.parse(savedCart);
-    renderCart();
-  }
-}
-
-// Cart bei Änderungen speichern
 function addToCart(name, price) {
-  const priceInEuro = price / 100;
-  cartItems.push({ name, price: priceInEuro });
-  renderCart();
-  saveCartToLocalStorage();
-  cartSidebar.classList.add("open");
+  Cart.addItem(name, price);
 }
 
 function removeFromCart(index) {
-  cartItems.splice(index, 1);
-  renderCart();
-  saveCartToLocalStorage();
+  Cart.removeItem(index);
 }
 
-// Cart beim Laden der Seite wiederherstellen
-document.addEventListener("DOMContentLoaded", function () {
-  loadCartFromLocalStorage();
-  if (window.MENU_DATA) {
-    renderMenuItems();
-  }
-});
+function checkout() {
+  Checkout.process();
+}
 
-const input = document.getElementById("search-input");
-input.addEventListener("input", function () {
-  const searchTerm = this.value.toLowerCase();
-  const allItems = document.querySelectorAll(".menu-item"); // CSS Klasse der Artikel
-  allItems.forEach((item) => {
-    const title = item.querySelector("h3").textContent.toLowerCase();
-    const desc = item.querySelector(".description").textContent.toLowerCase();
-    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
-      item.style.display = "";
-    } else {
-      item.style.display = "none";
-    }
-  });
-});
-
+// ==============================
+// APP START
+// ==============================
 document.addEventListener("DOMContentLoaded", () => {
-  initMenuRendering();
-  initSearch();
-  initCart();
+  App.init();
 });
 
-function initMenuRendering() {
-  // re-render menu items
+// ==============================
+// DEBUGGING (nur in Entwicklung)
+// ==============================
+if (typeof window !== "undefined") {
+  window.VinaApp = {
+    Cart,
+    Menu,
+    Search,
+    Delivery,
+    cartItems: () => cartItems,
+    deliveryOption: () => deliveryOption,
+  };
 }
 
-function initSearch() {
-  const searchInput = document.getElementById("search-input");
-  searchInput.addEventListener("input", () => {
-    const term = searchInput.value.toLowerCase();
-    filterMenuItems(term);
-  });
-}
+// ==============================
+// MOBILE NAVIGATION MODULE
+// ==============================
+const MobileNav = {
+  // Mobile Navigation initialisieren
+  init() {
+    this.bindToggleEvent();
+    this.bindResizeEvent();
+    this.bindLinkEvents();
+  },
 
-function filterMenuItems(term) {
-  const menuItems = document.querySelectorAll(".menu-item");
-  menuItems.forEach((item) => {
-    const title = item.querySelector("h3").textContent.toLowerCase();
-    const desc = item.querySelector(".description").textContent.toLowerCase();
-    item.style.display =
-      title.includes(term) || desc.includes(term) ? "" : "none";
-  });
-}
+  // Toggle Button Event
+  bindToggleEvent() {
+    const toggleButton = document.getElementById("mobile-menu-toggle");
+    const nav = document.getElementById("main-nav");
 
-function initCart() {
-  // init cart functionality
-}
+    if (toggleButton && nav) {
+      toggleButton.addEventListener("click", () => {
+        nav.classList.toggle("mobile-open");
+        this.updateToggleIcon(nav.classList.contains("mobile-open"));
+      });
+    }
+  },
 
-let deliveryOption = "abholung"; // Standard auf Abholung
+  // Toggle Icon aktualisieren
+  updateToggleIcon(isOpen) {
+    const toggleButton = document.getElementById("mobile-menu-toggle");
+    if (toggleButton) {
+      toggleButton.textContent = isOpen ? "✕" : "☰";
+      toggleButton.setAttribute(
+        "aria-label",
+        isOpen ? "Menü schließen" : "Menü öffnen"
+      );
+    }
+  },
 
-// Eventlistener für Optionschange
-document.querySelectorAll('input[name="delivery-option"]').forEach((radio) => {
-  radio.addEventListener("change", (e) => {
-    deliveryOption = e.target.value;
-    renderCart(); // erneutes Rendering der Preise
-  });
-});
+  // Navigation schließen bei Fenster-Resize
+  bindResizeEvent() {
+    window.addEventListener("resize", () => {
+      const nav = document.getElementById("main-nav");
+      if (window.innerWidth > 768 && nav) {
+        nav.classList.remove("mobile-open");
+        this.updateToggleIcon(false);
+      }
+    });
+  },
 
-function renderCart() {
-  cartList.innerHTML = "";
-  let subtotal = 0;
-  cartItems.forEach((item, index) => {
-    subtotal += item.price;
-    const li = document.createElement("li");
-    li.innerHTML = `
-  <span class="cart-item-name">${item.name}</span>
-  <span class="cart-item-price">${item.price.toFixed(2)} €</span>
-  <button aria-label="Artikel entfernen" onclick="removeFromCart(${index})" class="remove-btn">❌</button>
-`;
-    cartList.appendChild(li);
-  });
+  // Navigation schließen bei Link-Klick (Mobile)
+  bindLinkEvents() {
+    const nav = document.getElementById("main-nav");
+    const links = nav?.querySelectorAll("a");
 
-  // Update Zwischensumme
-  document.getElementById("cart-subtotal").textContent =
-    subtotal.toFixed(2) + " €";
-
-  // Versandkosten berechnen
-  let deliveryCosts = 0;
-  if (deliveryOption === "lieferung") {
-    deliveryCosts = subtotal >= 30 ? 0 : 4.99;
-  }
-  document.getElementById("delivery-costs").textContent =
-    deliveryCosts.toFixed(2) + " €";
-
-  // Gesamtsumme
-  const total = subtotal + deliveryCosts;
-  document.getElementById("cart-total").textContent = total.toFixed(2) + " €";
-
-  cartCount.textContent = cartItems.length;
-}
+    if (links && nav) {
+      links.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 768) {
+            nav.classList.remove("mobile-open");
+            this.updateToggleIcon(false);
+          }
+        });
+      });
+    }
+  },
+};
