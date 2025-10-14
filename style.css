@@ -125,9 +125,19 @@ header .logo img {
 }
 
 .restaurant-hero {
-  background-image: url(./assets/img/sushi-7372852_1920.webp);
-  height: 300px;
-  position: 25%;
+  background-image: url("./assets/img/sushi-7372852_1920.webp");
+  background-position: bottom center; /* Fokus auf unteren Bildbereich */
+  background-repeat: no-repeat;
+  background-size: cover; /* Bild skaliert den Container ausfüllend */
+  height: 400px; /* Anpassen an dein Layout */
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  color: #fff; /* Textfarbe in Weiß */
+  display: flex;
+  align-items: flex-end; /* Text am unteren Rand platzieren, falls Text im Overlay ist */
+  padding: 20px;
 }
 
 header nav ul {
@@ -608,7 +618,9 @@ footer {
 /* ==============================
    🎭 TYPOGRAPHY
    ============================== */
-h1,
+header h1 {
+  color: white;
+}
 h2,
 h3 {
   margin-bottom: 0.8rem;
