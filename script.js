@@ -111,6 +111,15 @@ const Cart = {
   },
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const closeBtn = document.getElementById("close-cart");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      document.getElementById("cart-sidebar").classList.remove("open");
+    });
+  }
+});
+
 // ==============================
 // MENU MODULE
 // ==============================
