@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Projektname</title>
+  <meta name="description" content="Bestell App Asia Food — Japanisches Sushi & Vietnamesische Küche" />
+  <meta name="author" content="Asia Food — Japanisches Sushi & Vietnamesische Küche" />
+  <meta name="robots" content="index, unfollow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Asia Food — Japanisches Sushi & Vietnamesische Küche" />
+  <meta property="og:description" content="Bestell App Asia Food — Japanisches Sushi & Vietnamesische Küche" />
+  <meta property="og:image" content="./assets/img/sushi-7372852_1920.webp" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://raphael-neuberger.developerakademie.net/bestellapp" />
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16x16.png" />
+
+
+  <!-- CSS -->
+  <!-- <link rel="stylesheet" href="./styles/standard.css" /> -->
+  <link rel="stylesheet" href="./styles/assets.css" />
+  <link rel="stylesheet" href="./styles/fonts.css" />
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- JS (defer für bessere Performance) -->
+  <script src="./scripts/templates.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <!-- Inline header (vormals in header.html) -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div>
+        <a class="logo" href="index.html">
+          <img src="./assets/img/Logo.png" alt="Vina Food Logo" height="44" />
+        </a>
+      </div>
+      <div class="restaurant-name">
+        <strong>Asia Food — Japanisches Sushi &amp; Vietnamesische Küche</strong>
+        <div class="restaurant-meta">Oberndorferstraße 22 · Landshut</div>
+      </div>
+
+
+
+    </div>
+  </header>
+
+  <main id="main" role="main"><!-- Hero / Restaurant-Kopfzeile -->
+    <section class="restaurant-hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1>Asia Food — Japanisches Sushi &amp; Vietnamesische Küche</h1>
+          <p class="meta">Asia • Sushi • Vietnamesisch</p>
+          <p class="address">Oberndorferstraße 22, 84032 Landshut</p>
+        </div>
+
+
+
+      </div>
+    </section>
+
+    <div>
+      <input class="search" type="search" id="search-input" placeholder="Suche Gerichte oder Menü">
+
+    </div>
+    <!-- Kategorie-Navigation (Ankerlinks zu den Sektionen) -->
+    <nav class="categories" aria-label="Speisekategorien">
+      <ul>
+        <li><a href="#vorspeisen">Vorspeisen</a></li>
+        <li><a href="#suppen">Suppen</a></li>
+        <li><a href="#salate">Salate</a></li>
+        <li><a href="#sushi-maki">Sushi - Maki</a></li>
+        <li><a href="#desserts">Desserts</a></li>
+        <li><a href="#drinks">Getränke</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="vorspeisen" data-category="Vorspeisen">
+        <h2>Vorspeisen</h2>
+        <div class="menu-items" id="vorspeisen-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+
+      <section id="suppen" data-category="Suppen">
+        <h2>Suppen</h2>
+        <div class="menu-items" id="suppen-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+
+      <section id="salate" data-category="Salate">
+        <h2>Salate</h2>
+        <div class="menu-items" id="salate-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+
+      <section id="sushi-maki" data-category="Sushi - Maki">
+        <h2>Sushi - Maki</h2>
+        <div class="menu-items" id="sushi-maki-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+
+      <section id="desserts" data-category="Desserts">
+        <h2>Desserts</h2>
+        <div class="menu-items" id="desserts-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+
+      <section id="getraenke" data-category="Getränke">
+        <h2>Getränke</h2>
+        <div class="menu-items" id="getraenke-container">
+          <!-- Artikel werden hier eingefügt -->
+        </div>
+      </section>
+    </main>
+
+
+    <!-- Warenkorb-Button (immer sichtbar) -->
+    <div id="cart-button" onclick="toggleCart()">
+      🛒 <span id="cart-count">0</span>
+    </div>
+
+
+    <div id="cart-sidebar" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
+      <h2 id="cart-title" style="color: var(--primary); margin-bottom: 1rem;">Dein Warenkorb</h2>
+
+      <ul id="cart-items"
+        style="list-style: none; padding-left: 0; flex-grow: 1; overflow-y: auto; margin-bottom: 1.5rem;">
+        <!-- Hier werden die Artikel eingehängt -->
+      </ul>
+
+      <fieldset style="border: none; margin-bottom: 1.5rem;">
+        <legend style="font-weight: 700; margin-bottom: 0.5rem;">Lieferoption wählen</legend>
+        <label
+          style="display: inline-flex; align-items: center; cursor: pointer; margin-right: 1.5rem; color: var(--text-primary);">
+          <input type="radio" name="delivery-option" value="abholung" checked
+            style="margin-right: 0.5rem; cursor: pointer;">
+          Abholung (0,00 €)
+        </label>
+        <label style="display: inline-flex; align-items: center; cursor: pointer; color: var(--text-primary);">
+          <input type="radio" name="delivery-option" value="lieferung" style="margin-right: 0.5rem; cursor: pointer;">
+          Lieferung (+4,99 € unter 30 €)
+        </label>
+      </fieldset>
+
+      <div style="font-size: 1rem; line-height: 1.4; color: var(--text-primary); margin-bottom: 1rem;">
+        <div>
+          <strong>Zwischensumme:</strong> <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div>
+          <strong>Lieferkosten:</strong> <span id="delivery-costs">0,00 €</span>
+        </div>
+        <div style="margin-top: 0.5rem; font-size: 1.2rem; font-weight: 700; color: var(--primary);">
+          <strong>Gesamtsumme:</strong> <span id="cart-total">0,00 €</span>
+        </div>
+      </div>
+
+      <button id="checkout-btn" onclick="checkout()" style="
+    background-color: var(--primary);
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 100%;
+    transition: background-color var(--transition);
+  " onmouseover="this.style.backgroundColor='#b71c1c'" onmouseout="this.style.backgroundColor='var(--primary)'">
+        Zur Kasse
+      </button>
+    </div>
+
+
+
+</body>
+
+</html>
