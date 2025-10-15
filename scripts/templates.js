@@ -1,6 +1,6 @@
 // Menü-Daten (je Kategorie mind. 10 Artikel)
 (function () {
-  const vorspeisen = [
+  const appetizers = [
     {
       id: "v1",
       title: "Mini Frühlingsrollen (6 St.)",
@@ -73,7 +73,7 @@
     },
   ];
 
-  const suppen = [
+  const soups = [
     {
       id: "s1",
       title: "Pho Bo",
@@ -146,7 +146,7 @@
     },
   ];
 
-  const salate = [
+  const salads = [
     {
       id: "sal1",
       title: "Gurken-Avocado Salat",
@@ -219,7 +219,7 @@
     },
   ];
 
-  const sushiMaki = [
+  const sushiRolls = [
     {
       id: "su1",
       title: "California Roll (8 St.)",
@@ -365,7 +365,7 @@
     },
   ];
 
-  const getraenke = [
+  const beverages = [
     {
       id: "g1",
       title: "Coca-Cola 0,33l",
@@ -439,11 +439,11 @@
   ];
 
   window.MENU_DATA = {
-    vorspeisen,
-    suppen,
-    salate,
-    sushiMaki,
+    appetizers,
+    soups,
+    salads,
+    sushiRolls,
     desserts,
-    getraenke,
+    beverages,
   };
 })();
