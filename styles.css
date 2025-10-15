@@ -2085,6 +2085,12 @@ footer {
    ============================== */
 
 /* Kategorien bei 768px und kleiner ausblenden */
+
+@media (max-width: 1024px) {
+  .categories {
+    display: none !important;
+  }
+}
 @media (max-width: 768px) {
   .categories {
     display: none !important;
