@@ -66,6 +66,7 @@ const Cart = {
     if (index >= 0 && index < cartItems.length) {
       cartItems.splice(index, 1);
       this.updateAfterChange();
+      this.open();
     }
   },
 
@@ -82,10 +83,12 @@ const Cart = {
     if (index >= 0 && index < cartItems.length) {
       const item = cartItems[index];
       if (item.quantity > 1) {
-        item.quantity -= 1;
-        item.totalPrice = item.price * item.quantity;
-        this.updateAfterChange();
+        item.quantity--;
+      } else {
+        cartItems.splice(index, 1);
       }
+      this.updateAfterChange();
+      this.open(); // hält die Sidebar offen
     }
   },
 

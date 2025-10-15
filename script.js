@@ -169,7 +169,7 @@ const Accessibility = {
     const isClickOnCartButton = this.isClickOnCartButton(e.target);
 
     if (!isClickOnCart && !isClickOnCartButton) {
-      Cart.close();
+      Cart.removeItem(index);
     }
   },
 
