@@ -1241,7 +1241,7 @@ header {
    DESKTOP WARENKORB SIDEBAR (STICKY)
    ============================== */
 #cart-sidebar {
-  position: fixed;
+  /* position: fixed; */
   top: var(--header-height);
   right: 0;
   width: 400px;
@@ -1307,6 +1307,7 @@ header {
   flex-grow: 1;
   overflow-y: auto;
   padding: var(--space-24);
+  background: var(--color-surface);
 }
 
 #cart-items {
@@ -1497,7 +1498,7 @@ header {
    MOBILE CART BUTTON (Responsive, unten mittig)
    ============================== */
 .mobile-cart-btn {
-  position: fixed;
+  /* position: fixed; */
   bottom: var(--space-20);
   left: 50%;
   transform: translateX(-50%);
@@ -1952,4 +1953,154 @@ footer {
 
 [data-theme="dark"] * {
   border-color: #404040 !important;
+}
+/* /* ==============================
+   WARENKORB-SIDEBAR FÜR ALLE AUFLÖSUNGEN
+   ============================== */
+
+/* DESKTOP-CART-BUTTON - immer oben rechts sichtbar */
+.desktop-cart-btn {
+  display: block !important;
+
+  top: 12px !important;
+  right: 16px !important;
+  z-index: 2000 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border-radius: 20px !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+/* MOBILE-CART-BUTTON - immer unten mittig sichtbar */
+.mobile-cart-btn {
+  display: flex !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 2000 !important;
+  background: rgba(17, 17, 17, 0.95) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 14px 24px !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* SIDEBAR-GRUNDEINSTELLUNGEN */
+#cart-sidebar {
+  position: fixed !important;
+  right: 0 !important;
+  background: var(--background) !important;
+  border-left: 2px solid var(--border-color) !important;
+  box-shadow: -8px 0 24px var(--shadow) !important;
+  transform: translateX(100%) !important;
+  transition: transform 0.3s ease !important;
+  z-index: 1500 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* SIDEBAR GEÖFFNET */
+#cart-sidebar.open {
+  transform: translateX(0) !important;
+}
+*/
+
+/* DESKTOP-ANSICHT (über 768px) */
+@media (min-width: 769px) {
+  #cart-sidebar {
+    top: var(--header-height) !important;
+    width: 400px !important;
+    height: calc(100vh - var(--header-height)) !important;
+  }
+}
+
+/* TABLET/MOBILE-ANSICHT (768px und kleiner) */
+@media (max-width: 768px) {
+  #cart-sidebar {
+    top: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    transform: translateX(100%) !important;
+  }
+
+  #cart-sidebar.open {
+    transform: translateX(0) !important;
+  }
+}
+
+/* KLEINSTE AUFLÖSUNG (320px und kleiner) */
+@media (max-width: 320px) {
+  .desktop-cart-btn {
+    top: 8px !important;
+    right: 8px !important;
+    padding: 6px 12px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .mobile-cart-btn {
+    bottom: 12px !important;
+    padding: 10px 16px !important;
+    font-size: 0.9rem !important;
+  }
+
+  #cart-sidebar {
+    width: 100% !important;
+    height: 100vh !important;
+    top: 0 !important;
+  }
+}
+*/
+
+/* OVERLAY BEIM SIDEBAR-ÖFFNEN */
+.cart-sidebar.open::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+/* CONTENT BLUR BEIM SIDEBAR-ÖFFNEN */
+.cart-sidebar.open ~ header,
+.cart-sidebar.open ~ main,
+.cart-sidebar.open ~ footer {
+  filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ==============================
+   CATEGORIES BEI KLEINEREN AUFLÖSUNGEN AUSBLENDEN
+   ============================== */
+
+/* Kategorien bei 768px und kleiner ausblenden */
+@media (max-width: 768px) {
+  .categories {
+    display: none !important;
+  }
+}
+
+/* ODER: Kategorien nur bei sehr kleinen Auflösungen ausblenden */
+@media (max-width: 480px) {
+  .categories {
+    display: none !important;
+  }
+}
+
+/* ODER: Kategorien nur bei kleinsten Auflösungen ausblenden */
+@media (max-width: 320px) {
+  .categories {
+    display: none !important;
+  }
 }
