@@ -306,11 +306,14 @@ html {
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 *,
@@ -607,36 +610,6 @@ select.form-control {
     rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
 }
 
-/* Container layout */
-.container {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: var(--space-16);
-  padding-left: var(--space-16);
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: var(--container-sm);
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: var(--container-md);
-  }
-}
-@media (min-width: 1024px) {
-  .container {
-    max-width: var(--container-lg);
-  }
-}
-@media (min-width: 1280px) {
-  .container {
-    max-width: var(--container-xl);
-  }
-}
-
 /* Utility classes */
 .flex {
   display: flex;
@@ -777,7 +750,6 @@ body {
   --app-accent: var(--color-orange-400);
   --app-transition: var(--duration-normal) var(--ease-standard);
 }
-
 /* ==============================
    LAYOUT
    ============================== */
@@ -787,28 +759,6 @@ body {
   padding: 0 var(--space-16);
   max-width: var(--container-xl);
 }
-
-@media (min-width: 640px) {
-  .container {
-    max-width: var(--container-sm);
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: var(--container-md);
-  }
-}
-@media (min-width: 1024px) {
-  .container {
-    max-width: var(--container-lg);
-  }
-}
-@media (min-width: 1280px) {
-  .container {
-    max-width: var(--container-xl);
-  }
-}
-
 /* ==============================
    RESPONSIVE HEADER
    ============================== */
@@ -966,7 +916,6 @@ header {
 }
 
 .mobile-menu-toggle {
-  display: none;
   background: none;
   border: none;
   color: var(--color-cream-50);
@@ -1268,6 +1217,7 @@ header {
   padding: var(--space-24);
   border-bottom: 2px solid var(--color-border);
   background: var(--color-surface);
+  overflow-x: hidden;
 }
 
 .cart-header h2 {
@@ -1308,6 +1258,7 @@ header {
   overflow-y: auto;
   padding: var(--space-24);
   background: var(--color-surface);
+  overflow-x: hidden;
 }
 
 #cart-items {
@@ -1432,6 +1383,7 @@ header {
   border-top: 2px solid var(--color-border);
   padding: var(--space-24);
   background: var(--color-surface);
+  overflow-x: hidden;
 }
 
 .cart-totals {
@@ -1693,13 +1645,49 @@ footer {
 /* ==============================
    RESPONSIVE DESIGN (bis 320px ohne Scrollbalken)
    ============================== */
+/* Container layout */
 
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--app-accent);
+    border-bottom: 2px solid var(--color-border);
+    z-index: 200;
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: var(--container-lg);
+    }
+    .main-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--app-accent);
+      border-bottom: 2px solid var(--color-border);
+      z-index: 200;
+    }
+  }
+  @media (min-width: 1280px) {
+  }
+}
 /* Tablet */
 @media (max-width: 768px) {
   :root {
     --header-height: 140px;
   }
-
+  .container {
+    max-width: var(--container-md);
+  }
   header {
     padding: var(--space-12) var(--space-16);
   }
@@ -1727,10 +1715,6 @@ footer {
     flex-direction: column;
     gap: 0;
     padding: var(--space-16);
-  }
-
-  .mobile-menu-toggle {
-    display: block;
   }
 
   .theme-toggle .theme-text {
@@ -1781,6 +1765,10 @@ footer {
     padding: var(--space-10) var(--space-12);
   }
 
+  .header-top {
+    flex-direction: column;
+  }
+
   .logo h1 {
     font-size: var(--font-size-base);
   }
@@ -1820,6 +1808,9 @@ footer {
     font-size: var(--font-size-sm);
   }
 
+  #cart-sidebar.open ~ .mobile-cart-btn {
+    display: none !important;
+  }
   .categories ul {
     padding: var(--space-12);
     gap: var(--space-8);
@@ -1843,6 +1834,10 @@ footer {
 
   header {
     padding: var(--space-8);
+  }
+
+  .header-top {
+    flex-direction: column;
   }
 
   .logo h1 {
@@ -2057,7 +2052,6 @@ footer {
     top: 0 !important;
   }
 }
-*/
 
 /* OVERLAY BEIM SIDEBAR-ÖFFNEN */
 .cart-sidebar.open::before {

@@ -87,8 +87,8 @@ const Cart = {
       } else {
         cartItems.splice(index, 1);
       }
+      item.totalPrice = item.price * item.quantity;
       this.updateAfterChange();
-      this.open(); // hält die Sidebar offen
     }
   },
 
