@@ -24,19 +24,19 @@ const DOM = {
 };
 
 // ==============================
-// MENU MODULE (rendert aus ./scripts/templates.js)
+// MENU MODULE (rendert aus ./scripts/db.js)
 // ==============================
 const Menu = {
   renderItems() {
     if (!window.MENU_DATA) {
-      console.error("MENU_DATA aus ./scripts/templates.js nicht gefunden!");
+      console.error("MENU_DATA aus ./scripts/db.js nicht gefunden!");
       console.error(
-        "Stellen Sie sicher, dass scripts/templates.js vor script.js geladen wird."
+        "Stellen Sie sicher, dass scripts/db.js vor script.js geladen wird."
       );
       return;
     }
 
-    console.log("Renderiere Menü-Artikel aus templates.js...");
+    console.log("Renderiere Menü-Artikel aus db.js...");
     Object.keys(window.MENU_DATA).forEach((categoryKey) => {
       this.renderCategory(categoryKey);
     });
@@ -67,7 +67,7 @@ const Menu = {
   },
 
   getContainerSelector(categoryKey) {
-    return categoryKey === "sushiMaki" ? "sushi-maki" : categoryKey;
+    return categoryKey === "sushiRolls" ? "sushi-Rolls" : categoryKey;
   },
 
   addItemsToContainer(container, items, categoryKey) {
@@ -208,9 +208,9 @@ const App = {
     if (window.MENU_DATA) {
       Menu.renderItems();
     } else {
-      console.error("❌ MENU_DATA aus ./scripts/templates.js nicht gefunden!");
+      console.error("❌ MENU_DATA aus ./scripts/db.js nicht gefunden!");
       console.error(
-        'Stellen Sie sicher, dass <script src="./scripts/templates.js"></script> VOR script.js geladen wird.'
+        'Stellen Sie sicher, dass <script src="./scripts/db.js"></script> VOR script.js geladen wird.'
       );
     }
   },
